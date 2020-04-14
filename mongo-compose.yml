@@ -1,0 +1,24 @@
+version: '3'
+
+services:
+  mongo_main:
+    image: mongo:latest
+    container_name: mongo_main
+    restart: always
+    ports:
+      - 27000:27017
+    environment:
+      - "MONGO_INITDB_ROOT_USERNAME=root"
+      - "MONGO_INITDB_ROOT_PASSWORD=${MONGO_ROOT_PASSWORD}"
+    volumes:
+      - mongo_main_data:/data/db
+      - mongo_main_config:/data/configdb
+    networks:
+      - mongo_net
+  
+volumes:
+  mongo_main_data: {}
+  mongo_main_config: {}
+
+networks:
+  mongo_net:

@@ -1,0 +1,22 @@
+version: '3'
+
+services:
+  mssql:
+    image: mcr.microsoft.com/mssql/server:2019-latest
+    container_name: mssql
+    restart: always
+    ports:
+      - 1433:1433
+    environment:
+      - "SA_PASSWORD=${MSSQL_SA_PASSWORD}"
+      - "ACCEPT_EULA=Y"
+    volumes:
+      - sqlserver:/var/opt/mssql
+    networks:
+      - identityserver_net
+  
+volumes:
+  sqlserver: {}
+
+networks:
+  identityserver_net:
